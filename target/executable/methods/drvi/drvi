@@ -449,9 +449,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "drvi-py==0.1.7" "torch==2.3.0" "torchvision==0.18.0"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods drvi"
-LABEL org.opencontainers.image.created="2025-08-29T09:25:30Z"
+LABEL org.opencontainers.image.created="2025-08-29T09:28:47Z"
 LABEL org.opencontainers.image.source="https://github.com/theislab/DRVI?tab=readme-ov-file"
-LABEL org.opencontainers.image.revision="8f95c9f7e496b053decc586882955a60f3433e6f"
+LABEL org.opencontainers.image.revision="331114a31f5bf17984c4dc2098b81ac80ebc356d"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
