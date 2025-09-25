@@ -3389,7 +3389,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/uce",
     "viash_version" : "0.9.4",
-    "git_commit" : "a7c6851347584a7b9a1541a39fbc39761ebe7ed4",
+    "git_commit" : "84d752468fbe209103d21465412f2ec70e5b9bfc",
     "git_remote" : "https://github.com/EpigeneMax/task_batch_integration"
   },
   "package_config" : {

@@ -449,9 +449,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "inmoose"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods combat_seq"
-LABEL org.opencontainers.image.created="2025-09-25T08:47:37Z"
+LABEL org.opencontainers.image.created="2025-09-25T08:55:17Z"
 LABEL org.opencontainers.image.source="https://github.com/epigenelabs/inmoose"
-LABEL org.opencontainers.image.revision="a7c6851347584a7b9a1541a39fbc39761ebe7ed4"
+LABEL org.opencontainers.image.revision="84d752468fbe209103d21465412f2ec70e5b9bfc"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1082,7 +1082,7 @@ adata = read_anndata(
 
 print("Run Combat-Seq", flush=True)
 counts = adata.T.to_df().astype(np.double).values
-corrected_counts = pycombat_seq(adata.X, adata.obs["batch"])
+corrected_counts = pycombat_seq(counts, adata.obs["batch"])
 
 print("Store output", flush=True)
 output = ad.AnnData(
