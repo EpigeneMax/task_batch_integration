@@ -3278,6 +3278,9 @@ meta = [
   ],
   "info" : {
     "preferred_normalization" : "counts",
+    "method_types" : [
+      "feature"
+    ],
     "type" : "method",
     "type_info" : {
       "label" : "Method",
@@ -3375,7 +3378,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/combat_seq",
     "viash_version" : "0.9.4",
-    "git_commit" : "331114a31f5bf17984c4dc2098b81ac80ebc356d",
+    "git_commit" : "a7c6851347584a7b9a1541a39fbc39761ebe7ed4",
     "git_remote" : "https://github.com/EpigeneMax/task_batch_integration"
   },
   "package_config" : {
