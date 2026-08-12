@@ -446,9 +446,9 @@ function ViashDockerfile {
 FROM openproblems/base_python:1
 ENTRYPOINT []
 LABEL org.opencontainers.image.description="Companion container for running component data_processors precompute_clustering_merge"
-LABEL org.opencontainers.image.created="2025-09-25T08:55:18Z"
+LABEL org.opencontainers.image.created="2026-08-12T18:56:05Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_batch_integration"
-LABEL org.opencontainers.image.revision="84d752468fbe209103d21465412f2ec70e5b9bfc"
+LABEL org.opencontainers.image.revision="1b221110452c75773600929ae3dcd4d130187885"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

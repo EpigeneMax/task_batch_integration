@@ -3247,13 +3247,13 @@ meta = [
           "name" : "--model_name",
           "description" : "Which model to use. Not used if --model is provided.",
           "default" : [
-            "v2-medium"
+            "medium-v1.5"
           ],
           "required" : false,
           "choices" : [
-            "large",
-            "v2-medium",
-            "small"
+            "large-v1",
+            "medium-v1.5",
+            "small-v1"
           ],
           "direction" : "input",
           "multiple" : false,
@@ -3287,7 +3287,7 @@ meta = [
           "name" : "--max_len",
           "description" : "The maximum length of the gene sequence.",
           "default" : [
-            4000
+            2300
           ],
           "required" : false,
           "direction" : "input",
@@ -3339,18 +3339,18 @@ meta = [
     ],
     "variants" : {
       "scprint_large" : {
-        "model_name" : "large"
+        "model_name" : "large-v1"
       },
       "scprint_medium" : {
-        "model_name" : "v2-medium"
+        "model_name" : "medium-v1.5"
       },
       "scprint_small" : {
-        "model_name" : "small"
+        "model_name" : "small-v1"
       }
     },
     "test_setup" : {
       "run" : {
-        "model_name" : "small",
+        "model_name" : "small-v1",
         "batch_size" : 16,
         "max_len" : 100
       }
@@ -3440,8 +3440,7 @@ meta = [
           "type" : "python",
           "user" : false,
           "pip" : [
-            "scprint>=2.3.0",
-            "gseapy>=1.1.8"
+            "scprint==2.3.5"
           ],
           "upgrade" : true
         },
@@ -3476,7 +3475,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scprint",
     "viash_version" : "0.9.4",
-    "git_commit" : "84d752468fbe209103d21465412f2ec70e5b9bfc",
+    "git_commit" : "1b221110452c75773600929ae3dcd4d130187885",
     "git_remote" : "https://github.com/EpigeneMax/task_batch_integration"
   },
   "package_config" : {
@@ -3654,6 +3653,7 @@ import scprint
 import torch
 from huggingface_hub import hf_hub_download
 from scdataloader import Preprocessor
+from scdataloader.utils import load_genes
 from scprint import scPrint
 from scprint.tasks import Embedder
 
@@ -3737,34 +3737,55 @@ if model_checkpoint_file is None:
         repo_id="jkobject/scPRINT", filename=f"{par['model_name']}.ckpt"
     )
 
+print(f"Model checkpoint file: '{model_checkpoint_file}'", flush=True)
+
 if torch.cuda.is_available():
     print("CUDA is available, using GPU", flush=True)
-    precision = "16"
-    dtype = torch.float16
     transformer = "flash"
 else:
     print("CUDA is not available, using CPU", flush=True)
-    precision = "32"
-    dtype = torch.float32
     transformer = "normal"
 
-print(f"Model checkpoint file: '{model_checkpoint_file}'", flush=True)
+try:
+    m = torch.load(model_checkpoint_file)
+# if not use this instead since the model weights are by default mapped to GPU types
+except RuntimeError:
+    m = torch.load(model_checkpoint_file, map_location=torch.device("cpu"))
 
-m = torch.load(model_checkpoint_file, map_location=torch.device("cpu"))
+# both are for compatibility issues with different versions of the pretrained model, so we need to load it with the correct transformer
+if "prenorm" in m["hyper_parameters"]:
+    m["hyper_parameters"].pop("prenorm")
+    torch.save(m, model_checkpoint_file)
 if "label_counts" in m["hyper_parameters"]:
+    # you need to set precpt_gene_emb=None otherwise the model will look for its precomputed gene embeddings files although they were already converted into model weights, so you don't need this file for a pretrained model
     model = scPrint.load_from_checkpoint(
         model_checkpoint_file,
-        transformer=transformer,  # Don't use this for GPUs with flashattention
         precpt_gene_emb=None,
         classes=m["hyper_parameters"]["label_counts"],
+        transformer=transformer,
     )
 else:
     model = scPrint.load_from_checkpoint(
-        model_checkpoint_file,
-        transformer=transformer,  # Don't use this for GPUs with flashattention
-        precpt_gene_emb=None,
+        model_checkpoint_file, precpt_gene_emb=None, transformer=transformer
     )
 del m
+# this might happen if you have a model that was trained with a different set of genes than the one you are using in the ontology (e.g. newer ontologies), While having genes in the onlogy not in the model is fine. the opposite is not, so we need to remove the genes that are in the model but not in the ontology
+missing = set(model.genes) - set(load_genes(model.organisms).index)
+if len(missing) > 0:
+    print(
+        "Warning: some genes missmatch exist between model and ontology: solving...",
+    )
+    model._rm_genes(missing)
+
+# again if not on GPU you need to convert the model to float32
+if not torch.cuda.is_available():
+    model = model.to(torch.float32)
+
+# you can perform your inference on float16 if you have a GPU, otherwise use float64
+dtype = torch.float16 if torch.cuda.is_available() else torch.float32
+
+# the models are often loaded with some parts still displayed as "cuda" and some as "cpu", so we need to make sure that the model is fully on the right device
+model = model.to("cuda" if torch.cuda.is_available() else "cpu")
 
 print("\\\\n>>> Embedding data...", flush=True)
 n_cores = min(len(os.sched_getaffinity(0)), 24)
@@ -3781,7 +3802,6 @@ embedder = Embedder(
     keep_all_cls_pred=False,
     output_expression="none",
     save_every=30_000,
-    precision=precision,
     dtype=dtype,
 )
 embedded, _ = embedder(model, adata, cache=False)
