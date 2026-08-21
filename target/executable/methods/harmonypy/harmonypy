@@ -446,12 +446,12 @@ function ViashDockerfile {
 FROM openproblems/base_python:1
 ENTRYPOINT []
 RUN pip install --upgrade pip && \
-  pip install --upgrade --no-cache-dir "harmonypy"
+  pip install --upgrade --no-cache-dir "harmonypy>=2"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods harmonypy"
-LABEL org.opencontainers.image.created="2026-08-21T09:26:00Z"
+LABEL org.opencontainers.image.created="2026-08-21T09:37:06Z"
 LABEL org.opencontainers.image.source="https://github.com/slowkow/harmonypy"
-LABEL org.opencontainers.image.revision="23674ddbc00d4c5c33cadf4921333eb58bb525b5"
+LABEL org.opencontainers.image.revision="0b5a656005cea44143bd3643602d3f4504525f81"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1091,7 +1091,7 @@ output = ad.AnnData(
     obs=adata.obs[[]],
     var=adata.var[[]],
     obsm={
-        "X_emb": out.Z_corr.transpose()
+        "X_emb": out.Z_corr
     },
     shape=adata.shape,
     uns={

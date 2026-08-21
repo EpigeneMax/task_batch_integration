@@ -445,6 +445,7 @@ function ViashDockerfile {
     cat << 'VIASHDOCKER'
 FROM openproblems/base_pytorch_nvidia:1
 ENTRYPOINT []
+ENV TRITON_PTXAS_PATH=/usr/local/lib/python3.12/dist-packages/triton/third_party/cuda/bin/ptxas
 RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "scprint==2.3.5"
 
@@ -458,9 +459,9 @@ RUN pip install --upgrade pip && \
   python -c 'from scdataloader.utils import populate_my_ontology; populate_my_ontology()'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scprint"
-LABEL org.opencontainers.image.created="2026-08-21T09:26:02Z"
+LABEL org.opencontainers.image.created="2026-08-21T09:37:08Z"
 LABEL org.opencontainers.image.source="https://github.com/cantinilab/scPRINT"
-LABEL org.opencontainers.image.revision="23674ddbc00d4c5c33cadf4921333eb58bb525b5"
+LABEL org.opencontainers.image.revision="0b5a656005cea44143bd3643602d3f4504525f81"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

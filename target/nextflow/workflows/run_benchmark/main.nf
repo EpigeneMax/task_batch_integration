@@ -3529,6 +3529,12 @@ meta = [
       }
     },
     {
+      "name" : "methods/cellplm",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
       "name" : "methods/combat",
       "repository" : {
         "type" : "local"
@@ -3589,6 +3595,12 @@ meta = [
       }
     },
     {
+      "name" : "methods/sca",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
       "name" : "methods/scalex",
       "repository" : {
         "type" : "local"
@@ -3638,6 +3650,12 @@ meta = [
     },
     {
       "name" : "methods/scvi",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/ss_stacas",
       "repository" : {
         "type" : "local"
       }
@@ -3789,7 +3807,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.4",
-    "git_commit" : "23674ddbc00d4c5c33cadf4921333eb58bb525b5",
+    "git_commit" : "0b5a656005cea44143bd3643602d3f4504525f81",
     "git_remote" : "https://github.com/EpigeneMax/task_batch_integration"
   },
   "package_config" : {
@@ -3880,6 +3898,46 @@ meta = [
         }
       },
       {
+        "name" : "Jeremie Kalfon",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "jkobject",
+          "orcid" : "0000-0002-2818-9728"
+        }
+      },
+      {
+        "name" : "Seo Hyon Kim",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "seohyonkim",
+          "orcid" : "0009-0007-3062-4681"
+        }
+      },
+      {
+        "name" : "Josep Garnica",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "JGarnica22",
+          "orcid" : "0000-0001-9493-1321"
+        }
+      },
+      {
+        "name" : "Daniel Schaffer",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "schafferde",
+          "orcid" : "0000-0003-3608-152X"
+        }
+      },
+      {
         "name" : "Scott Gigante",
         "roles" : [
           "contributor"
@@ -3905,8 +3963,7 @@ meta = [
           "contributor"
         ],
         "info" : {
-          "github" : "martinkim0",
-          "orcid" : "0009-0003-8555-1361"
+          "github" : "martinkim0"
         }
       },
       {
@@ -3920,13 +3977,53 @@ meta = [
         }
       },
       {
-        "name" : "Jeremie Kalfon",
+        "name" : "Tianyu Liu",
         "roles" : [
           "contributor"
         ],
         "info" : {
-          "github" : "jkobject",
-          "orcid" : "0000-0002-2818-9728"
+          "github" : "HelloWorldLTY",
+          "orcid" : "0000-0002-9412-6573"
+        }
+      },
+      {
+        "name" : "Calvin McCarter",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "calvinmccarter",
+          "orcid" : "0000-0002-7257-1350"
+        }
+      },
+      {
+        "name" : "Stephen Chung",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "stephen-chung-mh",
+          "orcid" : "0009-0009-5833-9721"
+        }
+      },
+      {
+        "name" : "Wendao Liu",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "liuwd15",
+          "orcid" : "0000-0002-5124-9338"
+        }
+      },
+      {
+        "name" : "Maximilien Colange",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "EpigeneMax",
+          "orcid" : "0000-0003-4769-3302"
         }
       }
     ],
@@ -3963,6 +4060,7 @@ include { shuffle_integration_by_cell_type } from "${meta.resources_dir}/../../.
 include { batchelor_fastmnn } from "${meta.resources_dir}/../../../nextflow/methods/batchelor_fastmnn/main.nf"
 include { batchelor_mnn_correct } from "${meta.resources_dir}/../../../nextflow/methods/batchelor_mnn_correct/main.nf"
 include { bbknn } from "${meta.resources_dir}/../../../nextflow/methods/bbknn/main.nf"
+include { cellplm } from "${meta.resources_dir}/../../../nextflow/methods/cellplm/main.nf"
 include { combat } from "${meta.resources_dir}/../../../nextflow/methods/combat/main.nf"
 include { combat_seq } from "${meta.resources_dir}/../../../nextflow/methods/combat_seq/main.nf"
 include { density_adaptive } from "${meta.resources_dir}/../../../nextflow/methods/density_adaptive/main.nf"
@@ -3973,6 +4071,7 @@ include { harmonypy } from "${meta.resources_dir}/../../../nextflow/methods/harm
 include { liger } from "${meta.resources_dir}/../../../nextflow/methods/liger/main.nf"
 include { mnnpy } from "${meta.resources_dir}/../../../nextflow/methods/mnnpy/main.nf"
 include { pyliger } from "${meta.resources_dir}/../../../nextflow/methods/pyliger/main.nf"
+include { sca } from "${meta.resources_dir}/../../../nextflow/methods/sca/main.nf"
 include { scalex } from "${meta.resources_dir}/../../../nextflow/methods/scalex/main.nf"
 include { scanorama_correct } from "${meta.resources_dir}/../../../nextflow/methods/scanorama_correct/main.nf"
 include { scanorama_integrate } from "${meta.resources_dir}/../../../nextflow/methods/scanorama_integrate/main.nf"
@@ -3982,6 +4081,7 @@ include { scgpt_zeroshot } from "${meta.resources_dir}/../../../nextflow/methods
 include { scimilarity } from "${meta.resources_dir}/../../../nextflow/methods/scimilarity/main.nf"
 include { scprint } from "${meta.resources_dir}/../../../nextflow/methods/scprint/main.nf"
 include { scvi } from "${meta.resources_dir}/../../../nextflow/methods/scvi/main.nf"
+include { ss_stacas } from "${meta.resources_dir}/../../../nextflow/methods/ss_stacas/main.nf"
 include { uce } from "${meta.resources_dir}/../../../nextflow/methods/uce/main.nf"
 include { asw_batch } from "${meta.resources_dir}/../../../nextflow/metrics/asw_batch/main.nf"
 include { asw_label } from "${meta.resources_dir}/../../../nextflow/metrics/asw_label/main.nf"
@@ -4021,6 +4121,9 @@ methods = [
   batchelor_fastmnn,
   batchelor_mnn_correct,
   bbknn,
+  cellplm.run(
+    args: [model: file("s3://openproblems-work/cache/cellplm-ckpt.zip")]
+  ),
   combat,
   combat_seq,
   density_adaptive,
@@ -4031,6 +4134,7 @@ methods = [
   liger,
   mnnpy,
   pyliger,
+  sca,
   scalex,
   scanorama_correct,
   scanorama_integrate,
@@ -4046,6 +4150,7 @@ methods = [
   ),
   scprint,
   scvi,
+  ss_stacas,
   uce.run(
     args: [model: file("s3://openproblems-work/cache/uce-model-v5.zip")]
   )

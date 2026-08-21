@@ -3393,10 +3393,15 @@ meta = [
           "user" : false,
           "pip" : [
             "pyarrow<15.0.0a0,>=14.0.1",
-            "huggingface_hub",
-            "git+https://huggingface.co/ctheodoris/Geneformer.git"
+            "huggingface_hub"
           ],
           "upgrade" : true
+        },
+        {
+          "type" : "docker",
+          "run" : [
+            "git clone --depth 1 https://huggingface.co/ctheodoris/Geneformer.git /opt/Geneformer && \\\\\n  pip install --no-cache-dir /opt/Geneformer \\"transformers<5\\"\n"
+          ]
         }
       ]
     }
@@ -3407,7 +3412,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/geneformer",
     "viash_version" : "0.9.4",
-    "git_commit" : "23674ddbc00d4c5c33cadf4921333eb58bb525b5",
+    "git_commit" : "0b5a656005cea44143bd3643602d3f4504525f81",
     "git_remote" : "https://github.com/EpigeneMax/task_batch_integration"
   },
   "package_config" : {
@@ -3498,6 +3503,46 @@ meta = [
         }
       },
       {
+        "name" : "Jeremie Kalfon",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "jkobject",
+          "orcid" : "0000-0002-2818-9728"
+        }
+      },
+      {
+        "name" : "Seo Hyon Kim",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "seohyonkim",
+          "orcid" : "0009-0007-3062-4681"
+        }
+      },
+      {
+        "name" : "Josep Garnica",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "JGarnica22",
+          "orcid" : "0000-0001-9493-1321"
+        }
+      },
+      {
+        "name" : "Daniel Schaffer",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "schafferde",
+          "orcid" : "0000-0003-3608-152X"
+        }
+      },
+      {
         "name" : "Scott Gigante",
         "roles" : [
           "contributor"
@@ -3523,8 +3568,7 @@ meta = [
           "contributor"
         ],
         "info" : {
-          "github" : "martinkim0",
-          "orcid" : "0009-0003-8555-1361"
+          "github" : "martinkim0"
         }
       },
       {
@@ -3538,13 +3582,53 @@ meta = [
         }
       },
       {
-        "name" : "Jeremie Kalfon",
+        "name" : "Tianyu Liu",
         "roles" : [
           "contributor"
         ],
         "info" : {
-          "github" : "jkobject",
-          "orcid" : "0000-0002-2818-9728"
+          "github" : "HelloWorldLTY",
+          "orcid" : "0000-0002-9412-6573"
+        }
+      },
+      {
+        "name" : "Calvin McCarter",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "calvinmccarter",
+          "orcid" : "0000-0002-7257-1350"
+        }
+      },
+      {
+        "name" : "Stephen Chung",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "stephen-chung-mh",
+          "orcid" : "0009-0009-5833-9721"
+        }
+      },
+      {
+        "name" : "Wendao Liu",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "liuwd15",
+          "orcid" : "0000-0002-5124-9338"
+        }
+      },
+      {
+        "name" : "Maximilien Colange",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "EpigeneMax",
+          "orcid" : "0000-0003-4769-3302"
         }
       }
     ],
@@ -3620,6 +3704,10 @@ dep = {
 
 ## VIASH END
 
+# upstream reorganised the repo for Geneformer V2 and dropped the gc95M dictionaries and the
+# gf-*-i4096 model directories from main -- pin the last revision that still has them
+GENEFORMER_REVISION = "42dbf0ae41244b93f1c3735fa393a966ffe64dfa"
+
 n_processors = os.cpu_count()
 
 print(">>> Reading input...", flush=True)
@@ -3666,21 +3754,25 @@ dictionary_files = {
         repo_id="ctheodoris/Geneformer",
         subfolder=dictionaries_subfolder,
         filename=f"ensembl_mapping_dict_gc{model_details['dataset']}.pkl",
+        revision=GENEFORMER_REVISION,
     ),
     "gene_median": hf_hub_download(
         repo_id="ctheodoris/Geneformer",
         subfolder=dictionaries_subfolder,
         filename=f"gene_median_dictionary_gc{model_details['dataset']}.pkl",
+        revision=GENEFORMER_REVISION,
     ),
     "gene_name_id": hf_hub_download(
         repo_id="ctheodoris/Geneformer",
         subfolder=dictionaries_subfolder,
         filename=f"gene_name_id_dict_gc{model_details['dataset']}.pkl",
+        revision=GENEFORMER_REVISION,
     ),
     "token": hf_hub_download(
         repo_id="ctheodoris/Geneformer",
         subfolder=dictionaries_subfolder,
         filename=f"token_dictionary_gc{model_details['dataset']}.pkl",
+        revision=GENEFORMER_REVISION,
     ),
 }
 
@@ -3743,11 +3835,13 @@ model_files = {
         repo_id="ctheodoris/Geneformer",
         subfolder=par["model"],
         filename="model.safetensors",
+        revision=GENEFORMER_REVISION,
     ),
     "config": hf_hub_download(
         repo_id="ctheodoris/Geneformer",
         subfolder=par["model"],
         filename="config.json",
+        revision=GENEFORMER_REVISION,
     ),
 }
 model_dir = os.path.dirname(model_files["model"])

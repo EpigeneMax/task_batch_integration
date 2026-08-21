@@ -3402,7 +3402,7 @@ meta = [
         {
           "type" : "docker",
           "run" : [
-            "git clone https://github.com/bowang-lab/scGPT && \\\\\npip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu121 && \\\\\npip install \\"flash-attn<1.0.5\\" --no-build-isolation && \\\\\npip install ipykernel pandas scanpy numba \\"numpy<1.24\\" torchtext==0.17.0 scib \\"scvi-tools<1.0\\" datasets==2.14.5 transformers==4.33.2 wandb \\"cell-gears<0.0.3\\" torch_geometric pyarrow==15.0.0 gdown && \\\\\ncd scGPT && pip install -e . --no-deps\n"
+            "git clone https://github.com/bowang-lab/scGPT && \\\\\npip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu121 && \\\\\npip install ipykernel pandas scanpy numba \\"numpy<2\\" torchtext==0.17.2 scib \\"scvi-tools<1.0\\" datasets==2.14.5 transformers==4.36.2 wandb \\"cell-gears<0.0.3\\" torch_geometric pyarrow==15.0.0 gdown && \\\\\ncd scGPT && pip install -e . --no-deps\n"
           ]
         }
       ]
@@ -3414,7 +3414,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scgpt_zeroshot",
     "viash_version" : "0.9.4",
-    "git_commit" : "23674ddbc00d4c5c33cadf4921333eb58bb525b5",
+    "git_commit" : "0b5a656005cea44143bd3643602d3f4504525f81",
     "git_remote" : "https://github.com/EpigeneMax/task_batch_integration"
   },
   "package_config" : {
@@ -3505,6 +3505,46 @@ meta = [
         }
       },
       {
+        "name" : "Jeremie Kalfon",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "jkobject",
+          "orcid" : "0000-0002-2818-9728"
+        }
+      },
+      {
+        "name" : "Seo Hyon Kim",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "seohyonkim",
+          "orcid" : "0009-0007-3062-4681"
+        }
+      },
+      {
+        "name" : "Josep Garnica",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "JGarnica22",
+          "orcid" : "0000-0001-9493-1321"
+        }
+      },
+      {
+        "name" : "Daniel Schaffer",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "schafferde",
+          "orcid" : "0000-0003-3608-152X"
+        }
+      },
+      {
         "name" : "Scott Gigante",
         "roles" : [
           "contributor"
@@ -3530,8 +3570,7 @@ meta = [
           "contributor"
         ],
         "info" : {
-          "github" : "martinkim0",
-          "orcid" : "0009-0003-8555-1361"
+          "github" : "martinkim0"
         }
       },
       {
@@ -3545,13 +3584,53 @@ meta = [
         }
       },
       {
-        "name" : "Jeremie Kalfon",
+        "name" : "Tianyu Liu",
         "roles" : [
           "contributor"
         ],
         "info" : {
-          "github" : "jkobject",
-          "orcid" : "0000-0002-2818-9728"
+          "github" : "HelloWorldLTY",
+          "orcid" : "0000-0002-9412-6573"
+        }
+      },
+      {
+        "name" : "Calvin McCarter",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "calvinmccarter",
+          "orcid" : "0000-0002-7257-1350"
+        }
+      },
+      {
+        "name" : "Stephen Chung",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "stephen-chung-mh",
+          "orcid" : "0009-0009-5833-9721"
+        }
+      },
+      {
+        "name" : "Wendao Liu",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "liuwd15",
+          "orcid" : "0000-0002-5124-9338"
+        }
+      },
+      {
+        "name" : "Maximilien Colange",
+        "roles" : [
+          "contributor"
+        ],
+        "info" : {
+          "github" : "EpigeneMax",
+          "orcid" : "0000-0003-4769-3302"
         }
       }
     ],
