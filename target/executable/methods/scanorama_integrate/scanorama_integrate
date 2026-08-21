@@ -449,9 +449,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "scanorama"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scanorama_integrate"
-LABEL org.opencontainers.image.created="2026-08-12T18:56:09Z"
+LABEL org.opencontainers.image.created="2026-08-21T09:26:01Z"
 LABEL org.opencontainers.image.source="https://github.com/brianhie/scanorama"
-LABEL org.opencontainers.image.revision="1b221110452c75773600929ae3dcd4d130187885"
+LABEL org.opencontainers.image.revision="23674ddbc00d4c5c33cadf4921333eb58bb525b5"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

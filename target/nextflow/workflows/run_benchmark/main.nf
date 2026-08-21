@@ -3535,6 +3535,12 @@ meta = [
       }
     },
     {
+      "name" : "methods/combat_seq",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
       "name" : "methods/density_adaptive",
       "repository" : {
         "type" : "local"
@@ -3783,7 +3789,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.4",
-    "git_commit" : "1b221110452c75773600929ae3dcd4d130187885",
+    "git_commit" : "23674ddbc00d4c5c33cadf4921333eb58bb525b5",
     "git_remote" : "https://github.com/EpigeneMax/task_batch_integration"
   },
   "package_config" : {
@@ -3958,6 +3964,7 @@ include { batchelor_fastmnn } from "${meta.resources_dir}/../../../nextflow/meth
 include { batchelor_mnn_correct } from "${meta.resources_dir}/../../../nextflow/methods/batchelor_mnn_correct/main.nf"
 include { bbknn } from "${meta.resources_dir}/../../../nextflow/methods/bbknn/main.nf"
 include { combat } from "${meta.resources_dir}/../../../nextflow/methods/combat/main.nf"
+include { combat_seq } from "${meta.resources_dir}/../../../nextflow/methods/combat_seq/main.nf"
 include { density_adaptive } from "${meta.resources_dir}/../../../nextflow/methods/density_adaptive/main.nf"
 include { fadvi } from "${meta.resources_dir}/../../../nextflow/methods/fadvi/main.nf"
 include { geneformer } from "${meta.resources_dir}/../../../nextflow/methods/geneformer/main.nf"
@@ -4015,6 +4022,7 @@ methods = [
   batchelor_mnn_correct,
   bbknn,
   combat,
+  combat_seq,
   density_adaptive,
   fadvi,
   geneformer,
