@@ -3625,6 +3625,12 @@ meta = [
       }
     },
     {
+      "name" : "methods/scmerge2",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
       "name" : "methods/scgpt_finetuned",
       "repository" : {
         "type" : "local"
@@ -3807,7 +3813,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.4",
-    "git_commit" : "0b5a656005cea44143bd3643602d3f4504525f81",
+    "git_commit" : "22fb3f9e3b3ba3e67ee6a987de598c8187479b01",
     "git_remote" : "https://github.com/EpigeneMax/task_batch_integration"
   },
   "package_config" : {
@@ -4076,6 +4082,7 @@ include { scalex } from "${meta.resources_dir}/../../../nextflow/methods/scalex/
 include { scanorama_correct } from "${meta.resources_dir}/../../../nextflow/methods/scanorama_correct/main.nf"
 include { scanorama_integrate } from "${meta.resources_dir}/../../../nextflow/methods/scanorama_integrate/main.nf"
 include { scanvi } from "${meta.resources_dir}/../../../nextflow/methods/scanvi/main.nf"
+include { scmerge2 } from "${meta.resources_dir}/../../../nextflow/methods/scmerge2/main.nf"
 include { scgpt_finetuned } from "${meta.resources_dir}/../../../nextflow/methods/scgpt_finetuned/main.nf"
 include { scgpt_zeroshot } from "${meta.resources_dir}/../../../nextflow/methods/scgpt_zeroshot/main.nf"
 include { scimilarity } from "${meta.resources_dir}/../../../nextflow/methods/scimilarity/main.nf"
@@ -4139,6 +4146,7 @@ methods = [
   scanorama_correct,
   scanorama_integrate,
   scanvi,
+  scmerge2,
   scgpt_finetuned.run(
     args: [model: file("s3://openproblems-work/cache/scGPT_human.zip")]
   ),

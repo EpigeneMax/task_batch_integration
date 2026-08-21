@@ -3480,7 +3480,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/isolated_label_asw",
     "viash_version" : "0.9.4",
-    "git_commit" : "0b5a656005cea44143bd3643602d3f4504525f81",
+    "git_commit" : "22fb3f9e3b3ba3e67ee6a987de598c8187479b01",
     "git_remote" : "https://github.com/EpigeneMax/task_batch_integration"
   },
   "package_config" : {
